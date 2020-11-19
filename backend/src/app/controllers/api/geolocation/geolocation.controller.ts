@@ -1,11 +1,13 @@
-import { ApiResponse, ApiUseTag, Context, Delete, Get, HttpResponseOK, Post, Put } from '@foal/core';
+import { ApiResponse, ApiUseTag, Context, Delete, dependency, Get, HttpResponseOK, Post, Put } from '@foal/core';
 import { headerTags, responseStatusTags } from '../../swagger/open-api-tags';
 import { JWTRequired } from '@foal/jwt';
-import { ApiSuccessCode } from '../api-success-codes';
+import { GeolocationService } from '../../../services/geolocation.service';
 
 @ApiUseTag(headerTags.GEOLOCATION.name)
-@JWTRequired()
+// @JWTRequired()
 export class GeolocationController {
+  @dependency
+  geolocationService: GeolocationService
 
   @Post()
   @ApiResponse(...responseStatusTags[201])
@@ -13,15 +15,17 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
   createGeolocation(ctx: Context) {
-    return new HttpResponseOK({ code: ApiSuccessCode.GEOLOCATION_CREATED });
+    const geolocationResponse = this.geolocationService.createGeolocation();
+    return new HttpResponseOK(geolocationResponse);
   }
 
   @Get()
   @ApiResponse(...responseStatusTags[200])
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
-  getGeolocations(ctx: Context) {
-    return new HttpResponseOK({ data: 'ok'});
+  async getGeolocations(ctx: Context) {
+    const geolocationResponse = this.geolocationService.getGeolocations();
+    return new HttpResponseOK(geolocationResponse);
   }
 
   @Get('/:id')
@@ -30,7 +34,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[404])
   @ApiResponse(...responseStatusTags[500])
   getGeolocation(ctx: Context) {
-    return new HttpResponseOK({ data: 'ok'});
+    const geolocationResponse = this.geolocationService.getGeolocation();
+    return new HttpResponseOK(geolocationResponse);
   }
 
   @Put('/:id')
@@ -39,7 +44,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
   updateGeolocation(ctx: Context) {
-    return new HttpResponseOK({ code: ApiSuccessCode.GEOLOCATION_UPDATED });
+    const geolocationResponse = this.geolocationService.updateGeolocation();
+    return new HttpResponseOK(geolocationResponse);
   }
 
   @Delete('/:id')
@@ -47,7 +53,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
   deleteGeolocation(ctx: Context) {
-    return new HttpResponseOK({ code: ApiSuccessCode.GEOLOCATION_DELETED });
+    const geolocationResponse = this.geolocationService.deleteGeolocation();
+    return new HttpResponseOK(geolocationResponse);
   }
 
 }

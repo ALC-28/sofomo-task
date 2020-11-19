@@ -1,6 +1,7 @@
 export const headerTags = {
   AUTH: { name: 'Auth', description: 'Authentication and authorization of the user' },
-  GEOLOCATION: { name: 'Geolocation', description: 'Geolocation management' }
+  GEOLOCATION: { name: 'Geolocation', description: 'Geolocation management' },
+  IPSTACK: { name: 'IPStack', description: 'IPStack external service' }
 };
 
 export const responseStatusTags: {[key: number]: [number, {description: string}]} = {
