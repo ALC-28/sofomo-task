@@ -36,9 +36,11 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+backend/build
 
 # Dependency directories
-node_modules/
+backend/node_modules/
+frontend/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -102,3 +104,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Env folder
+
+backend/config/
