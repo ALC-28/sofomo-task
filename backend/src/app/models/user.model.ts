@@ -1,5 +1,6 @@
 import { hashPassword } from '@foal/core';
-import { model, models, Schema } from 'mongoose';
+import { Document, Model, model, models, Schema } from 'mongoose';
+import { UserInterface } from '../interfaces/user.interface';
 
 const userSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
@@ -10,4 +11,6 @@ userSchema.methods.setPassword = async function(password: string) {
   this.password = await hashPassword(password);
 };
 
-export const User = models.User || model('User', userSchema);
+interface UserModel extends Model<Document>, UserInterface {}
+
+export const User = models.User || model<Document, UserModel>('User', userSchema);

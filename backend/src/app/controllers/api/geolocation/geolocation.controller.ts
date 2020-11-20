@@ -14,8 +14,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[400])
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
-  createGeolocation(ctx: Context) {
-    const geolocationResponse = this.geolocationService.createGeolocation();
+  async createGeolocation(ctx: Context) {
+    const geolocationResponse = await this.geolocationService.createGeolocation(ctx.request.body);
     return new HttpResponseOK(geolocationResponse);
   }
 
@@ -24,7 +24,7 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
   async getGeolocations(ctx: Context) {
-    const geolocationResponse = this.geolocationService.getGeolocations();
+    const geolocationResponse = await this.geolocationService.getGeolocations();
     return new HttpResponseOK(geolocationResponse);
   }
 
@@ -33,8 +33,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[404])
   @ApiResponse(...responseStatusTags[500])
-  getGeolocation(ctx: Context) {
-    const geolocationResponse = this.geolocationService.getGeolocation();
+  async getGeolocation(ctx: Context) {
+    const geolocationResponse = await this.geolocationService.getGeolocation(ctx.request.params.id);
     return new HttpResponseOK(geolocationResponse);
   }
 
@@ -43,8 +43,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[400])
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
-  updateGeolocation(ctx: Context) {
-    const geolocationResponse = this.geolocationService.updateGeolocation();
+  async updateGeolocation(ctx: Context) {
+    const geolocationResponse = await this.geolocationService.updateGeolocation(ctx.request.params.id);
     return new HttpResponseOK(geolocationResponse);
   }
 
@@ -52,8 +52,8 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[200])
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
-  deleteGeolocation(ctx: Context) {
-    const geolocationResponse = this.geolocationService.deleteGeolocation();
+  async deleteGeolocation(ctx: Context) {
+    const geolocationResponse = await this.geolocationService.deleteGeolocation(ctx.request.params.id);
     return new HttpResponseOK(geolocationResponse);
   }
 

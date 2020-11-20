@@ -1,3 +1,6 @@
+import { Document } from 'mongoose';
+import { Geolocation } from '../models/geolocation.model';
+
 export enum ResponseSuccessCode {
   GEOLOCATION_CREATED = 'GEOLOCATION_CREATED',
   GEOLOCATION_UPDATED = 'GEOLOCATION_UPDATED',
@@ -5,23 +8,29 @@ export enum ResponseSuccessCode {
 }
 
 export class GeolocationService {
-  getGeolocations() {
-    return true;
+  async getGeolocations() {
+    const geolocations = await Geolocation.find({})
+    return { data: geolocations };
   }
   
-  getGeolocation() {
-    return true;
+  async getGeolocation(id) {
+    const geolocation = await Geolocation.findById(id);
+    return { data: geolocation };
   }
 
-  createGeolocation() {
+  async createGeolocation(ipstackGeolocation) {
+    const geolocation: Document = new Geolocation(ipstackGeolocation);
+    await geolocation.save();
     return { code: ResponseSuccessCode.GEOLOCATION_CREATED };
   }
 
-  updateGeolocation() {
+  async updateGeolocation(id) {
+    // await Geolocation.findByIdAndUpdate(id, {});
     return { code: ResponseSuccessCode.GEOLOCATION_UPDATED };
   }
 
-  deleteGeolocation() {
+  async deleteGeolocation(id) {
+    // await Geolocation.findByIdAndDelete(id);
     return { code: ResponseSuccessCode.GEOLOCATION_DELETED };
   }
 }
