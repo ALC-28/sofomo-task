@@ -10,12 +10,12 @@ export enum ResponseSuccessCode {
 export class GeolocationService {
   async getGeolocations() {
     const geolocations = await Geolocation.find({})
-    return { data: geolocations };
+    return { result: geolocations };
   }
   
   async getGeolocation(id) {
     const geolocation = await Geolocation.findById(id);
-    return { data: geolocation };
+    return { result: geolocation };
   }
 
   async createGeolocation(ipstackGeolocation) {

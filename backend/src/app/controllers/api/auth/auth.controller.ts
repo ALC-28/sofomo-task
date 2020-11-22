@@ -39,11 +39,13 @@ export class AuthController {
   @ValidateBody({
     additionalProperties: false,
     properties: {
+      firstName: { type: 'string' },
+      lastName: { type: 'string' },
       email: { type: 'string', format: 'email' },
       password: { type: 'string' },
       passwordConfirmed: { type: 'string' }
     },
-    required: [ 'email', 'password', 'passwordConfirmed' ],
+    required: [ 'firstName', 'lastName', 'email', 'password', 'passwordConfirmed' ],
     type: 'object',
   })
   async register(ctx: Context) {

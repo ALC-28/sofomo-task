@@ -30,6 +30,6 @@ const geolocationSchema: Schema = new Schema({
   }
 });
 
-interface GeolocationModel extends Model<Document>, GeolocationInterface {}
+export interface GeolocationModel extends Model<Document>, GeolocationInterface {}
 
 export const Geolocation = models.Geolocation || model<Document, GeolocationModel>('Geolocation', geolocationSchema);
