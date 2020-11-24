@@ -4,7 +4,7 @@ import { JWTRequired } from '@foal/jwt';
 import { GeolocationService } from '../../../services/geolocation.service';
 
 @ApiUseTag(headerTags.GEOLOCATION.name)
-// @JWTRequired()
+@JWTRequired()
 export class GeolocationController {
   @dependency
   geolocationService: GeolocationService

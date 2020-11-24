@@ -19,13 +19,16 @@ export class AuthService {
   async login(requestBody) {
     const { email, password } = requestBody;
     const user = await User.findOne({ email }).lean() as UserInterface;
-    const passwordMismatch = !await verifyPassword(password, user.password);
-    if (!user || passwordMismatch) {
+    if (!user) {
       return { code: ResponseErrorCode.LOGIN_FAILED };
     }
-    const token = sign({ email: user.email }, Config.get('settings.jwt.secretOrPublicKey'), { expiresIn: '1h' });
-    console.log('user', user);
-    return { result: { token, ...user } };
+    const passwordMismatch = !await verifyPassword(password, user.password);
+    if (!passwordMismatch) {
+      return { code: ResponseErrorCode.LOGIN_FAILED };
+    }
+    const userData = {firstName: user.firstName, lastName: user.lastName, email: user.email};
+    const token = sign(userData, Config.get('settings.jwt.secretOrPublicKey'), { expiresIn: '1h' });
+    return { result: { token, ...userData } };
   }
 
   async register(requestBody) {

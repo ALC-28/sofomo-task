@@ -1,9 +1,10 @@
 import { ApiUseTag, Context, dependency, Get, HttpResponseOK } from '@foal/core';
+import { JWTRequired } from '@foal/jwt';
 import { IpstackService } from '../../../services/ipstack.service';
 import { headerTags } from '../../swagger/open-api-tags';
 
 @ApiUseTag(headerTags.IPSTACK.name)
-// @JWTRequired()
+@JWTRequired()
 export class IpstackController {
   @dependency
   ipstackService: IpstackService

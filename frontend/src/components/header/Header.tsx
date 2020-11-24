@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useResetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../states/User';
 
@@ -9,10 +9,10 @@ const Header = () => {
 
   const user = useRecoilValue(userState);
 
-  const unsetUser = useResetRecoilState(userState)
+  const unsetUser = useSetRecoilState(userState)
 
   const logout = () => {
-    unsetUser();
+    unsetUser(null);
     history.push("/");
   };
 

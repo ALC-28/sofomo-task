@@ -31,7 +31,7 @@ export class AuthController {
   }
 
   @Post('/register')
-  // @JWTRequired()
+  @JWTRequired()
   @ApiResponse(...responseStatusTags[201])
   @ApiResponse(...responseStatusTags[400])
   @ApiResponse(...responseStatusTags[401])
