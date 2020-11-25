@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const interceptor = (userToken: string | null) => {
+const interceptor = (userToken: string | null, setError: any = null) => {
   axios.interceptors.request.use(
     (conf) => {
       conf.headers['Authorization'] = `Bearer ${userToken}`;
@@ -16,7 +16,7 @@ const interceptor = (userToken: string | null) => {
       return Promise.resolve(next);
     },
     (error) => {
-      console.log('handling response error', error.response.data.code);
+      setError(error.response.data.code);
       return Promise.reject(error);
     }
   );

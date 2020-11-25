@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../states/User';
 
 const Header = () => {
+
   const history = useHistory();
 
   const user = useRecoilValue(userState);

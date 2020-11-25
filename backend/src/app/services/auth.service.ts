@@ -23,7 +23,7 @@ export class AuthService {
       return { code: ResponseErrorCode.LOGIN_FAILED };
     }
     const passwordMismatch = !await verifyPassword(password, user.password);
-    if (!passwordMismatch) {
+    if (passwordMismatch) {
       return { code: ResponseErrorCode.LOGIN_FAILED };
     }
     const userData = {firstName: user.firstName, lastName: user.lastName, email: user.email};

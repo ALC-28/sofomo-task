@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Formik, FormikProps } from 'formik';
 import * as yup from 'yup';
+import interceptor from '../../interceptor';
+import { errorState } from '../../states/Error';
 
 interface FormValue {
   email: string;
@@ -20,14 +22,17 @@ const schema = yup.object({
 });
 
 function Login() {
+  const setError = useSetRecoilState(errorState);
+
   const history = useHistory();
   
   const setUser = useSetRecoilState(userState);
   
   const login = async (formValue: FormValue) => {
-    console.log('fv', formValue);
+    interceptor(null, setError);
     const user = await axios.post('/api/auth/login', formValue);
     setUser(user.data.result);
+    interceptor(user.data.result.token, setError);
     history.push("/geolocations");
   };
 
