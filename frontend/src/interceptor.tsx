@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-const interceptor = (userToken: string | null, setError: any = null) => {
+const interceptor = (userToken: string | null, setMessage: any = null) => {
   axios.interceptors.request.use(
     (conf) => {
-      conf.headers['Authorization'] = `Bearer ${userToken}`;
+      if (userToken) {
+        conf.headers['Authorization'] = `Bearer ${userToken}`;
+      }
       return conf;
     },
     (error) => {
@@ -12,11 +14,13 @@ const interceptor = (userToken: string | null, setError: any = null) => {
   );
   axios.interceptors.response.use(
     (next) => {
-      console.log('handling response message', next);
+      if (next.data.message) {
+        setMessage(next.data.message);
+      }
       return Promise.resolve(next);
     },
     (error) => {
-      setError(error.response.data.code);
+      setMessage(error.response.data.message);
       return Promise.reject(error);
     }
   );

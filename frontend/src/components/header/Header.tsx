@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../states/User';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 
 const Header = () => {
 
@@ -19,23 +22,17 @@ const Header = () => {
 
   return (
     <>
-      {user && <div>
-        <button type="button" onClick={() => logout()}>Logout</button>
-        <ul>
-          <li>
-            User: {JSON.stringify(user)}
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/geolocations">Geolocations</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
-      </div>}
+      {user && <Navbar bg="light" variant="light">
+        <Navbar.Brand href="#home">Sofofo task</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="/geolocations">Geolocations</Nav.Link>
+          <Nav.Link href="/register">Register new user</Nav.Link>
+        </Nav>
+        <Navbar.Text className="justify-content-end">
+          Signed in as: {user.firstName} 
+          <Button variant="" onClick={() => logout()}>logout</Button>
+        </Navbar.Text>
+      </Navbar>}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 import { Geolocation } from '../models/geolocation.model';
 
-export enum ResponseSuccessCode {
+export enum MessageCode {
   GEOLOCATION_CREATED = 'GEOLOCATION_CREATED',
   GEOLOCATION_UPDATED = 'GEOLOCATION_UPDATED',
   GEOLOCATION_DELETED = 'GEOLOCATION_DELETED'
@@ -21,16 +21,16 @@ export class GeolocationService {
   async createGeolocation(ipstackGeolocation) {
     const geolocation: Document = new Geolocation(ipstackGeolocation);
     await geolocation.save();
-    return { code: ResponseSuccessCode.GEOLOCATION_CREATED };
+    return { message: MessageCode.GEOLOCATION_CREATED };
   }
 
   async updateGeolocation(id) {
     // await Geolocation.findByIdAndUpdate(id, {});
-    return { code: ResponseSuccessCode.GEOLOCATION_UPDATED };
+    return { message: MessageCode.GEOLOCATION_UPDATED };
   }
 
   async deleteGeolocation(id) {
     // await Geolocation.findByIdAndDelete(id);
-    return { code: ResponseSuccessCode.GEOLOCATION_DELETED };
+    return { message: MessageCode.GEOLOCATION_DELETED };
   }
 }

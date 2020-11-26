@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import { Formik, FormikProps } from 'formik';
 import * as yup from 'yup';
 import interceptor from '../../interceptor';
-import { errorState } from '../../states/Error';
+import { messageState } from '../../states/Message';
 
 interface FormValue {
   email: string;
@@ -22,17 +22,17 @@ const schema = yup.object({
 });
 
 function Login() {
-  const setError = useSetRecoilState(errorState);
+  const setMessage = useSetRecoilState(messageState);
 
   const history = useHistory();
   
   const setUser = useSetRecoilState(userState);
   
   const login = async (formValue: FormValue) => {
-    interceptor(null, setError);
+    interceptor(null, setMessage);
     const user = await axios.post('/api/auth/login', formValue);
     setUser(user.data.result);
-    interceptor(user.data.result.token, setError);
+    interceptor(user.data.result.token, setMessage);
     history.push("/geolocations");
   };
 

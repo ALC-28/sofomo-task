@@ -23,8 +23,8 @@ export class AuthController {
     type: 'object',
   })
   async login(ctx: Context) {
-    const loginResponse: {code?: string; data?: any} = await this.authService.login(ctx.request.body);
-    if (loginResponse.code) {
+    const loginResponse: {message?: string; data?: any} = await this.authService.login(ctx.request.body);
+    if (loginResponse.message) {
       return new HttpResponseUnauthorized(loginResponse);
     }
     return new HttpResponseOK(loginResponse);
@@ -49,7 +49,7 @@ export class AuthController {
     type: 'object',
   })
   async register(ctx: Context) {
-    const registerResponse: {code: string; successful?: boolean} = await this.authService.register(ctx.request.body);
+    const registerResponse: {message: string; successful?: boolean} = await this.authService.register(ctx.request.body);
     if (!registerResponse.successful) {
       return new HttpResponseBadRequest(registerResponse);
     }

@@ -1,3 +1,3 @@
 export const english = {
-  LOGIN_FAILED: 'Email or password is invalid'
+  ERROR_LOGIN_FAILED: 'Email or password is invalid'
 };
