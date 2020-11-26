@@ -5,3 +5,9 @@
   right: 0;
   margin: 0 auto;
 }
+
+.spinner {
+  position: absolute;
+  right: 300px;
+  top: 18px;
+}
