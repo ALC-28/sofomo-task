@@ -3,9 +3,9 @@ import { useSetRecoilState} from 'recoil';
 import { userState } from '../../states/User';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import styles from './Login.module.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 import { Formik, FormikProps } from 'formik';
 import * as yup from 'yup';
 import interceptor from '../../interceptor';
@@ -37,8 +37,8 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1 className={styles.test}>Login</h1>
+    <Container className="justify-content-md-center mt-3">
+      <h1 className="text-center">Sofomo task</h1>
       <Formik
         validationSchema={schema}
         onSubmit={login}
@@ -46,35 +46,33 @@ function Login() {
       >
         {(props: FormikProps<FormValue>) => (
           <Form noValidate onSubmit={props.handleSubmit}>
-            <Form.Row>
-              <Form.Group controlId="F01">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="email"
-                  value={props.values.email}
-                  onChange={props.handleChange}
-                  isInvalid={!!props.touched.email && !!props.errors.email}
-                />
-                <Form.Control.Feedback type="invalid">Email is invalid</Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group controlId="F02">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="password"
-                  value={props.values.password}
-                  onChange={props.handleChange}
-                  isInvalid={!!props.touched.password && !!props.errors.password}
-                />
-                <Form.Control.Feedback type="invalid">Password is invalid</Form.Control.Feedback>
-              </Form.Group>
-            </Form.Row>
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="text"
+                name="email"
+                value={props.values.email}
+                onChange={props.handleChange}
+                isInvalid={!!props.touched.email && !!props.errors.email}
+              />
+              <Form.Control.Feedback type="invalid">Email is invalid</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={props.values.password}
+                onChange={props.handleChange}
+                isInvalid={!!props.touched.password && !!props.errors.password}
+              />
+              <Form.Control.Feedback type="invalid">Password is invalid</Form.Control.Feedback>
+            </Form.Group>
             <Button type="submit">Submit form</Button>
           </Form>
         )}
       </Formik>     
-    </div>
+    </Container>
   );
 }
 
