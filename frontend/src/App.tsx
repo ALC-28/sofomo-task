@@ -40,8 +40,9 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Login} />
               <ProtectedRoute exact path='/geolocations' component={Geolocations} />
-              <ProtectedRoute exact path="/geolocation/:id" component={GeolocationDetails} />
-              <ProtectedRoute exact path="/geolocation/:id/edit" component={GeolocationEdit} />
+              <ProtectedRoute exact path="/geolocations/new" component={GeolocationEdit} />
+              <ProtectedRoute exact path="/geolocations/:id" component={GeolocationDetails} />
+              <ProtectedRoute exact path="/geolocations/:id/edit" component={GeolocationEdit} />
               <ProtectedRoute exact path="/register" component={Register} />
               <Route exact path="/unauthorized" component={NotFound} />
               <Route exact path="*" component={NotFound} />

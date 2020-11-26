@@ -33,7 +33,7 @@ function Login() {
     const user = await axios.post('/api/auth/login', formValue);
     setUser(user.data.result);
     interceptor(user.data.result.token, setMessage);
-    history.push("/geolocations");
+    history.push('/geolocations');
   };
 
   return (

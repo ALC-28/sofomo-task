@@ -1,14 +1,6 @@
 import { atom, AtomEffect } from "recoil";
 import JWTDecode from 'jwt-decode';
-
-export interface User {
-  token: string;
-  firstName: string; 
-  lastName: string; 
-  email: string;
-  iat?: number;
-  exp?: number;
-}
+import { User } from "../interfaces/user.interface";
 
 const getLoggedInUser = () => {
   const userToken = localStorage.getItem('token');

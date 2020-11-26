@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <>
-      {user && <Navbar bg="light" variant="light">
+      {user && <Navbar bg="light" variant="light" className="mb-3">
         <Navbar.Brand href="#home">Sofofo task</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/geolocations">Geolocations</Nav.Link>
