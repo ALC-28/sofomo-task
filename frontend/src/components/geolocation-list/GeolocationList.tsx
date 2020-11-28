@@ -33,15 +33,17 @@ function GeolocationList(props: Props) {
           <th>IP</th>
           <th>City</th>
           <th>Country</th>
+          <th>Comment</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {props.items.map((item, index) => <tr key="item._id">
+        {props.items.map((item, index) => <tr key={item._id}>
           <td>{index + 1}</td>
           <td>{item.ip}</td>
           <td>{item.city}</td>
           <td>{item.country_name}</td>
+          <td>{item.comment}</td>
           <td><Button onClick={() => goToDetails(item._id)} className="float-right">Details</Button></td>
         </tr>)}
       </tbody>

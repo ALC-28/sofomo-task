@@ -1,4 +1,4 @@
-export interface GeolocationInterface {
+export interface IPStackGeolocationInterface {
   ip: string;
   type: string;
   continent_code: string;
@@ -12,6 +12,10 @@ export interface GeolocationInterface {
   latitude: number;
   longitude: number;
   location: Location;
+}
+
+export interface GeolocationInterface extends IPStackGeolocationInterface {
+  comment: string;
 }
 
 interface Location {

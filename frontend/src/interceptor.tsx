@@ -20,7 +20,9 @@ const interceptor = (userToken: string | null, setMessage: any = null) => {
       return Promise.resolve(next);
     },
     (error) => {
-      setMessage(error.response.data.message);
+      if (error.response) {
+        setMessage(error.response.data.message);
+      }
       return Promise.reject(error);
     }
   );

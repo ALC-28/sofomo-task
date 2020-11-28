@@ -27,7 +27,7 @@ const App = () => {
   const isLoaderActive = useRecoilValue(loaderState);
   const loggedInUser = useRecoilValue(userState);
   if (!!loggedInUser) {
-    interceptor(loggedInUser.token);
+    interceptor(loggedInUser.token, setMessage);
   }
 
   return (

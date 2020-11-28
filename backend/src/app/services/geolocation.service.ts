@@ -18,8 +18,8 @@ export class GeolocationService {
     return { result: geolocation };
   }
 
-  async createGeolocation(ipstackGeolocation) {
-    const geolocation: Document = new Geolocation(ipstackGeolocation);
+  async createGeolocation(payload) {
+    const geolocation: Document = new Geolocation(payload);
     await geolocation.save();
     return { message: MessageCode.GEOLOCATION_CREATED };
   }

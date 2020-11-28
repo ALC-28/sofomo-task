@@ -26,8 +26,9 @@ const geolocationSchema: Schema = new Schema({
     'country_flag_emoji': { type: String, required: true },
     'country_flag_emoji_unicode': { type: String, required: true },
     'calling_code': { type: String, required: true },
-    'is_eu': { type: Boolean, required: true },
-  }
+    'is_eu': { type: Boolean, required: true }
+  },
+  comment: { type: String, required: true }
 });
 
 export interface GeolocationModel extends Model<Document>, GeolocationInterface {}

@@ -12,6 +12,7 @@ export interface GeolocationInterface {
   latitude: number;
   longitude: number;
   location: Location;
+  comment?: string;
 }
 
 interface Location {
