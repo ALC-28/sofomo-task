@@ -44,7 +44,7 @@ export class GeolocationController {
   @ApiResponse(...responseStatusTags[401])
   @ApiResponse(...responseStatusTags[500])
   async updateGeolocation(ctx: Context) {
-    const geolocationResponse = await this.geolocationService.updateGeolocation(ctx.request.params.id);
+    const geolocationResponse = await this.geolocationService.updateGeolocation(ctx.request.params.id, ctx.request.body);
     return new HttpResponseOK(geolocationResponse);
   }
 

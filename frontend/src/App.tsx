@@ -16,7 +16,7 @@ import interceptor from './interceptor';
 import { loaderState } from './states/Loader';
 
 const GeolocationDetails = lazy(() => import('./containers/geolocation-details/GeolocationDetails'));
-const GeolocationEdit = lazy(() => import('./containers/geolocation-edit/GeolocationEdit'));
+const GeolocationCreation = lazy(() => import('./containers/geolocation-creation/GeolocationCreation'));
 const Geolocations = lazy(() => import('./containers/geolocations/Geolocations'));
 const Login = lazy(() => import('./containers/login/Login'));
 const NotFound = lazy(() => import('./containers/not-found/NotFound'));
@@ -40,9 +40,9 @@ const App = () => {
             <Switch>
               <Route exact path="/" component={Login} />
               <ProtectedRoute exact path='/geolocations' component={Geolocations} />
-              <ProtectedRoute exact path="/geolocations/new" component={GeolocationEdit} />
+              <ProtectedRoute exact path="/geolocations/new" component={GeolocationCreation} />
               <ProtectedRoute exact path="/geolocations/:id" component={GeolocationDetails} />
-              <ProtectedRoute exact path="/geolocations/:id/edit" component={GeolocationEdit} />
+              <ProtectedRoute exact path="/geolocations/:id/edit" component={GeolocationDetails} />
               <ProtectedRoute exact path="/register" component={Register} />
               <Route exact path="/unauthorized" component={NotFound} />
               <Route exact path="*" component={NotFound} />

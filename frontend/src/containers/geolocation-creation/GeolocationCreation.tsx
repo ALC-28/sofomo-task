@@ -21,27 +21,27 @@ interface FormValue {
   comment: string;
 }
 
+const geolocationPropsDisplay = [
+  {field: 'ip', label: 'IP'},
+  {field: 'latitude', label: 'Latitude'},
+  {field: 'longitude', label: 'Longitude'},
+  {field: 'zip', label: 'Zip'},
+  {field: 'city', label: 'City'},
+  {field: 'region_name', label: 'Region name'},
+  {field: 'country_name', label: 'Country name'},
+  {field: 'continent_name', label: 'Continent name'}
+];
+
 const schema = yup.object({
   ip: yup.string().required(),
   comment: yup.string()
 });
 
-function GeolocationEdit() {
+function GeolocationCreation() {
   const { id }: RouteParams = useParams();
   const history = useHistory();
   const setLoader = useSetRecoilState(loaderState);
   const [geolocation, setGeolocation] = useState<GeolocationInterface | null>(null);
-
-  const geolocationPropsDisplay = [
-    {field: 'ip', label: 'IP'},
-    {field: 'latitude', label: 'Latitude'},
-    {field: 'longitude', label: 'Longitude'},
-    {field: 'zip', label: 'Zip'},
-    {field: 'city', label: 'City'},
-    {field: 'region_name', label: 'Region name'},
-    {field: 'country_name', label: 'Country name'},
-    {field: 'continent_name', label: 'Continent name'}
-  ];
 
   const setCurrentGeolocation = async (props: FormikProps<FormValue>) => {
     setLoader(true);
@@ -72,7 +72,7 @@ function GeolocationEdit() {
   
   return (
     <Container>
-      <h1>{id ? 'Edit geolocation' : 'Create geolocation'}</h1>
+      <h1>Create geolocation</h1>
       <div className="mb-3">
         <Formik
           validationSchema={schema}
@@ -142,4 +142,4 @@ function GeolocationEdit() {
   );
 }
 
-export default GeolocationEdit;
+export default GeolocationCreation;

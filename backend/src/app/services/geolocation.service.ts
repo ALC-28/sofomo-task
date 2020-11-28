@@ -24,13 +24,13 @@ export class GeolocationService {
     return { message: MessageCode.GEOLOCATION_CREATED };
   }
 
-  async updateGeolocation(id) {
-    // await Geolocation.findByIdAndUpdate(id, {});
+  async updateGeolocation(id, payload) {
+    await Geolocation.findByIdAndUpdate(id, payload);
     return { message: MessageCode.GEOLOCATION_UPDATED };
   }
 
   async deleteGeolocation(id) {
-    // await Geolocation.findByIdAndDelete(id);
+    await Geolocation.findByIdAndDelete(id);
     return { message: MessageCode.GEOLOCATION_DELETED };
   }
 }
