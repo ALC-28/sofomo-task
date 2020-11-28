@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -11,10 +11,6 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { loaderState } from '../../states/Loader';
 import { GeolocationInterface } from '../../interfaces/geolocation.interface';
-
-interface RouteParams {
-  id: string;
-}
 
 interface FormValue {
   ip: string;
@@ -38,7 +34,6 @@ const schema = yup.object({
 });
 
 function GeolocationCreation() {
-  const { id }: RouteParams = useParams();
   const history = useHistory();
   const setLoader = useSetRecoilState(loaderState);
   const [geolocation, setGeolocation] = useState<GeolocationInterface | null>(null);

@@ -10,3 +10,11 @@
   right: 300px;
   top: 18px;
 }
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

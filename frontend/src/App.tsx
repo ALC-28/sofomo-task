@@ -14,6 +14,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from './states/User';
 import interceptor from './interceptor';
 import { loaderState } from './states/Loader';
+import classNames from 'classnames';
 
 const GeolocationDetails = lazy(() => import('./containers/geolocation-details/GeolocationDetails'));
 const GeolocationCreation = lazy(() => import('./containers/geolocation-creation/GeolocationCreation'));
@@ -29,6 +30,7 @@ const App = () => {
   if (!!loggedInUser) {
     interceptor(loggedInUser.token, setMessage);
   }
+  const classSelector = classNames.bind(styles);
 
   return (
     <BrowserRouter>
@@ -49,8 +51,10 @@ const App = () => {
             </Switch>
           </Suspense>
           {message && <Toast show={!!message} animation={false} onClose={() => setMessage('')} className={styles.toast}>
-            <Toast.Header>
-              <strong className="mr-auto">{message.startsWith('ERROR_') ? 'Error' : 'Success'}</strong>
+            <Toast.Header className={message.startsWith('ERROR_') ? styles.error : styles.success}>
+              <strong className="mr-auto">
+                {message.startsWith('ERROR_') ? 'Error' : 'Success'}
+              </strong>
             </Toast.Header>
             <Toast.Body>
               <FormattedMessage id={message} />
