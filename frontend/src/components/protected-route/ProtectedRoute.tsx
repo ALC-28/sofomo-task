@@ -13,7 +13,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ component: Component, .
     <Route {...rest} render={props => (
       !!user 
         ? <Component {...rest} {...props} /> 
-        : <Redirect to={{ pathname: '/unauthorized', state: { from: props.location }}} />   
+        : <Redirect to={{ pathname: '/not-authorized', state: { from: props.location }}} />   
     )} />
   );
 };

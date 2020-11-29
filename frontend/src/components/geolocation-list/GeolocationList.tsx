@@ -3,9 +3,10 @@ import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
+import { GeolocationInterface } from '../../interfaces/geolocation.interface';
 
 interface Props {
-  items: any[];
+  items: GeolocationInterface[];
 }
 
 const getPaginationItems = (itemsQuantity: number, activePageNumber: number) => {
@@ -20,7 +21,7 @@ function GeolocationList(props: Props) {
   const activePage = 1;
   let paginationItems = getPaginationItems(props.items.length, activePage);
 
-  const goToDetails = (geolocationId: number) => {
+  const goToDetails = (geolocationId: string) => {
     history.push(`/geolocations/${geolocationId}`);
   };
 

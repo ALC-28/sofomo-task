@@ -1,4 +1,5 @@
 export interface GeolocationInterface {
+  _id: string;
   ip: string;
   type: string;
   continent_code: string;

@@ -23,9 +23,7 @@ const schema = yup.object({
 
 function Login() {
   const setMessage = useSetRecoilState(messageState);
-
   const history = useHistory();
-  
   const setUser = useSetRecoilState(userState);
   
   const login = async (formValue: FormValue) => {

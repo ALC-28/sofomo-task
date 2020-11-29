@@ -6,16 +6,14 @@ import { userState } from '../../states/User';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+import { User } from '../../interfaces/user.interface';
 
 const Header = () => {
-
   const history = useHistory();
-
-  const user = useRecoilValue(userState);
-
+  const user = useRecoilValue<User>(userState);
   const unsetUser = useSetRecoilState(userState)
 
-  const logout = () => {
+  const logout: () => void = () => {
     unsetUser(null);
     history.push("/");
   };
@@ -23,14 +21,14 @@ const Header = () => {
   return (
     <>
       {user && <Navbar bg="light" variant="light" className="mb-3">
-        <Navbar.Brand href="#home">Sofofo task</Navbar.Brand>
+        <Navbar.Brand>Sofofo task</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/geolocations">Geolocations</Nav.Link>
           <Nav.Link href="/register">Register new user</Nav.Link>
         </Nav>
         <Navbar.Text className="justify-content-end">
           Signed in as: {user.firstName} 
-          <Button variant="" onClick={() => logout()}>logout</Button>
+          <Button variant="link" onClick={() => logout()}>logout</Button>
         </Navbar.Text>
       </Navbar>}
     </>

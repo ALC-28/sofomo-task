@@ -3,6 +3,13 @@ import { isCommon } from '@foal/password';
 import { connect, disconnect } from 'mongoose';
 import { User } from '../app/models/user.model';
 
+interface ArgsInterface {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 export const schema = {
   additionalProperties: false,
   properties: {
@@ -15,7 +22,7 @@ export const schema = {
   type: 'object',
 };
 
-export async function main(args) {
+export async function main(args: ArgsInterface) {
   const user = new User();
   user.firstName = args.firstName;
   user.lastName = args.lastName;

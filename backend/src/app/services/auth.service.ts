@@ -13,7 +13,7 @@ export enum MessageCode {
 }
 
 export class AuthService {
-  async login(requestBody) {
+  async login(requestBody: {email: string, password: string}) {
     const { email, password } = requestBody;
     const user = await User.findOne({ email }).lean() as UserInterface;
     if (!user) {
@@ -28,7 +28,7 @@ export class AuthService {
     return { result: { token, ...userData } };
   }
 
-  async register(requestBody) {
+  async register(requestBody: {firstName: string, lastName: string, email: string, password: string, passwordConfirmed: string}) {
     const { firstName, lastName, email, password, passwordConfirmed } = requestBody;
     const isUserAlreadyRegistered = !!await User.findOne({ email });
     if (isUserAlreadyRegistered) {

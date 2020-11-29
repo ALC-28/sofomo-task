@@ -14,7 +14,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from './states/User';
 import interceptor from './interceptor';
 import { loaderState } from './states/Loader';
-import classNames from 'classnames';
+import NotAuthorized from './containers/not-authorized/NotAuthorized';
 
 const GeolocationDetails = lazy(() => import('./containers/geolocation-details/GeolocationDetails'));
 const GeolocationCreation = lazy(() => import('./containers/geolocation-creation/GeolocationCreation'));
@@ -30,7 +30,6 @@ const App = () => {
   if (!!loggedInUser) {
     interceptor(loggedInUser.token, setMessage);
   }
-  const classSelector = classNames.bind(styles);
 
   return (
     <BrowserRouter>
@@ -46,7 +45,7 @@ const App = () => {
               <ProtectedRoute exact path="/geolocations/:id" component={GeolocationDetails} />
               <ProtectedRoute exact path="/geolocations/:id/edit" component={GeolocationDetails} />
               <ProtectedRoute exact path="/register" component={Register} />
-              <Route exact path="/unauthorized" component={NotFound} />
+              <Route exact path="/not-authorized" component={NotAuthorized} />
               <Route exact path="*" component={NotFound} />
             </Switch>
           </Suspense>

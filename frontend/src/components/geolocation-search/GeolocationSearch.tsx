@@ -6,13 +6,13 @@ import Col from 'react-bootstrap/Col';
 import * as yup from 'yup';
 
 interface Props {
-  perform: (formValue: FormValue) => any;
+  perform: (formValue: FormValue) => void;
 }
 
-interface FormValue {
-  ip: string;
-  country_name: string;
-  city: string;
+export interface FormValue {
+  ip?: string;
+  country_name?: string;
+  city?: string;
 }
 
 const schema = yup.object({

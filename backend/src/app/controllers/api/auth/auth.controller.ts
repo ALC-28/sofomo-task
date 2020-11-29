@@ -1,7 +1,9 @@
-import { ApiResponse, Context, Post, ApiUseTag, ValidateBody, dependency, HttpResponseUnauthorized, HttpResponseOK, HttpResponseBadRequest } from '@foal/core';
-import { responseStatusTags, headerTags } from '../../swagger/open-api-tags';
+import { ApiResponse, Context, Post, ApiUseTag, ValidateBody, dependency, HttpResponseUnauthorized, HttpResponseOK, HttpResponseBadRequest, ApiRequestBody } from '@foal/core';
+import { getResponseStatusTags, headerTags } from '../../swagger/open-api-tags';
 import { JWTRequired } from '@foal/jwt';
 import { AuthService } from '../../../services/auth.service';
+import { LoginPayloadShema, LoginSchema, RegisterPayloadSchema } from '../../swagger/schema/auth';
+import { MessageShema } from '../../swagger/schema/message';
 
 @ApiUseTag(headerTags.AUTH.name)
 export class AuthController {
@@ -9,10 +11,11 @@ export class AuthController {
   authService: AuthService
 
   @Post('/login')
-  @ApiResponse(...responseStatusTags[200])
-  @ApiResponse(...responseStatusTags[400])
-  @ApiResponse(...responseStatusTags[401])
-  @ApiResponse(...responseStatusTags[500])
+  @ApiRequestBody({required: true, content: {'application/json': {schema: LoginPayloadShema}}})
+  @ApiResponse(...getResponseStatusTags(LoginSchema)[200])
+  @ApiResponse(...getResponseStatusTags()[400])
+  @ApiResponse(...getResponseStatusTags()[401])
+  @ApiResponse(...getResponseStatusTags()[500])
   @ValidateBody({
     additionalProperties: false,
     properties: {
@@ -32,10 +35,11 @@ export class AuthController {
 
   @Post('/register')
   @JWTRequired()
-  @ApiResponse(...responseStatusTags[201])
-  @ApiResponse(...responseStatusTags[400])
-  @ApiResponse(...responseStatusTags[401])
-  @ApiResponse(...responseStatusTags[500])
+  @ApiRequestBody({required: true, content: {'application/json': {schema: RegisterPayloadSchema}}})
+  @ApiResponse(...getResponseStatusTags(MessageShema)[201])
+  @ApiResponse(...getResponseStatusTags()[400])
+  @ApiResponse(...getResponseStatusTags()[401])
+  @ApiResponse(...getResponseStatusTags()[500])
   @ValidateBody({
     additionalProperties: false,
     properties: {
