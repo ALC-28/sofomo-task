@@ -1,0 +1,22 @@
+version: "3"
+services:
+  frontend:
+    container_name: sofomo-task-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: sofomo-task/frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/sofomo-task
+  backend:
+    container_name: sofomo-task-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: sofomo-task/backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/usr/src/sofomo-task
