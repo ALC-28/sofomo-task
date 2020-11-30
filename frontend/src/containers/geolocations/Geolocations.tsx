@@ -7,13 +7,26 @@ import { loaderState } from '../../states/Loader';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
-import { GeolocationInterface } from '../../interfaces/geolocation.interface';
+import { GeolocationSearchResult } from '../../interfaces/geolocation.interface';
+import { DisplayParams } from '../../interfaces/search-result.interface';
+import { omitBy } from 'lodash';
+
+interface SearchParams extends FormValue, DisplayParams {}
 
 const Geolocations = () => {
   const history = useHistory();
   const setLoader = useSetRecoilState(loaderState);
-  const [searchParams, setSearchParams] = useState<FormValue>({});
-  const [geolocations, setGeolocations] = useState<GeolocationInterface[]>([]);
+  const [searchParams, setSearchParams] = useState<SearchParams>({pageNumber: 1, itemsPerPage: 1});
+  const [searchResult, setSearchResult] = useState<GeolocationSearchResult | null>(null);
+
+  const getSearchParams = (incommingParams: SearchParams) => {
+    const updatedParams = {...searchParams, ...incommingParams};
+    if (!incommingParams.pageNumber) {
+      updatedParams.pageNumber = 1;
+    }
+    const cleanedParams = omitBy(updatedParams, (value) => !value);
+    setSearchParams(cleanedParams);
+  };
 
   const goToGeolocationCreation = () => {
     history.push('/geolocations/new');
@@ -23,7 +36,7 @@ const Geolocations = () => {
     setLoader(true);
     axios.get('/api/geolocations', { params: searchParams })
       .then(geolocations => {
-        setGeolocations(geolocations.data.result);
+        setSearchResult(geolocations.data.result);
         setLoader(false);
       });
   }, [searchParams, setLoader]);
@@ -32,9 +45,9 @@ const Geolocations = () => {
     <Container>
       <h1>Search for geolocation</h1>
       <div className="mb-3">
-        <GeolocationSearch perform={setSearchParams} />
+        <GeolocationSearch perform={getSearchParams} />
       </div>
-      <GeolocationList items={geolocations} />
+      <GeolocationList searchResult={searchResult} pageChanged={getSearchParams} />
       <div className="float-right">
         <Button onClick={() => goToGeolocationCreation()}>Add new geolocation</Button>
       </div>

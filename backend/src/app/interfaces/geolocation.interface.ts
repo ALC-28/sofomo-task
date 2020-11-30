@@ -1,3 +1,5 @@
+import { DisplayParams } from "./search-result.interface";
+
 export interface IPStackGeolocationInterface {
   ip: string;
   type: string;
@@ -16,6 +18,17 @@ export interface IPStackGeolocationInterface {
 
 export interface GeolocationInterface extends IPStackGeolocationInterface {
   comment: string;
+}
+
+export interface GeolocationSearchParams extends DisplayParams {
+  ip?: string; 
+  country_name?: string; 
+  city?: string;
+}
+
+export interface GeolocationSearchResult {
+  content: GeolocationInterface[],
+  displayParams: DisplayParams;
 }
 
 interface Location {

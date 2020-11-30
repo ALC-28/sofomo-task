@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { GeolocationInterface } from '../interfaces/geolocation.interface';
+import { GeolocationInterface, GeolocationSearchParams, GeolocationSearchResult } from '../interfaces/geolocation.interface';
 import { Geolocation } from '../models/geolocation.model';
 
 export enum MessageCode {
@@ -9,9 +9,15 @@ export enum MessageCode {
 }
 
 export class GeolocationService {
-  async getGeolocations() {
-    const geolocations = await Geolocation.find({})
-    return { result: geolocations };
+  async getGeolocations(query: GeolocationSearchParams): Promise<{result: GeolocationSearchResult}> {
+    let { pageNumber, itemsPerPage, ...filterQuery } = query;
+    pageNumber = Number(pageNumber);
+    itemsPerPage = Number(itemsPerPage);
+    const totalItems = (await Geolocation.find(filterQuery)).length;
+    const totalPages = totalItems ? Math.ceil(totalItems / itemsPerPage) : 0;
+    const skippedQuantity = (pageNumber - 1) * itemsPerPage; 
+    const geolocations = await Geolocation.find(filterQuery).skip(skippedQuantity).limit(itemsPerPage);
+    return { result: {displayParams: {pageNumber, itemsPerPage, totalPages}, content: geolocations }};
   }
   
   async getGeolocation(id: string) {

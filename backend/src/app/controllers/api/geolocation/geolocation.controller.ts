@@ -27,7 +27,7 @@ export class GeolocationController {
   @ApiResponse(...getResponseStatusTags()[401])
   @ApiResponse(...getResponseStatusTags()[500])
   async getGeolocations(ctx: Context) {
-    const geolocationResponse = await this.geolocationService.getGeolocations();
+    const geolocationResponse = await this.geolocationService.getGeolocations(ctx.request.query);
     return new HttpResponseOK(geolocationResponse);
   }
 

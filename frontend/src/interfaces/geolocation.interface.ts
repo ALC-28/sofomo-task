@@ -1,3 +1,10 @@
+import { DisplayParams } from "./search-result.interface";
+
+export interface GeolocationSearchResult {
+  content: GeolocationInterface[],
+  displayParams: DisplayParams;
+}
+
 export interface GeolocationInterface {
   _id: string;
   ip: string;
