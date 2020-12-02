@@ -22,7 +22,7 @@ interface FormValue {
 }
 
 const schema = yup.object({
-  comment: yup.string()
+  comment: yup.string().required()
 });
 
 const geolocationPropsDisplay = [
@@ -38,7 +38,8 @@ const geolocationPropsDisplay = [
 
 function GeolocationDetails() {
   const history = useHistory();
-  const isEditable = useLocation().pathname.split('/').pop() === 'edit';
+  const location = useLocation();
+  const isEditable = location.pathname.split('/').pop() === 'edit';
   const { id }: RouteParams = useParams();
   const setLoader = useSetRecoilState(loaderState);
   const [geolocation, setGeolocation] = useState<GeolocationInterface | null>(null);
@@ -68,7 +69,7 @@ function GeolocationDetails() {
       setGeolocation(response.data.result);
       setLoader(false);
     })
-  }, [id, setLoader])
+  }, [location, id, setLoader])
 
   return (
     <Container>
@@ -102,7 +103,9 @@ function GeolocationDetails() {
                       name="comment"
                       value={props.values.comment}
                       onChange={props.handleChange}
+                      isInvalid={!!props.touched.comment && !!props.errors.comment}
                     />
+                    <Form.Control.Feedback type="invalid">Comment is required</Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
                 <Form.Row>

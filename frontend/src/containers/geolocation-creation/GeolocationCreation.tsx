@@ -30,7 +30,7 @@ const geolocationPropsDisplay = [
 
 const schema = yup.object({
   ip: yup.string().required(),
-  comment: yup.string()
+  comment: yup.string().required()
 });
 
 function GeolocationCreation() {
@@ -86,7 +86,7 @@ function GeolocationCreation() {
                     onChange={props.handleChange}
                     isInvalid={!!props.touched.ip && !!props.errors.ip}
                   />
-                  <Form.Control.Feedback type="invalid">Geolocation is invalid</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">Geolocation is required</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col}>
                   <Form.Label>Comment</Form.Label>
@@ -95,7 +95,9 @@ function GeolocationCreation() {
                     name="comment"
                     value={props.values.comment}
                     onChange={props.handleChange}
+                    isInvalid={!!props.touched.comment && !!props.errors.comment}
                   />
+                  <Form.Control.Feedback type="invalid">Comment is required</Form.Control.Feedback>
                 </Form.Group>
               </Form.Row>
               <Form.Row>
