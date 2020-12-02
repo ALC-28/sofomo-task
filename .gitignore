@@ -107,4 +107,4 @@ dist
 
 # Env folder
 
-backend/config/
+backend/config/default.json
