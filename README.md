@@ -3,7 +3,8 @@
 ## Prerequisites
 
 1. If you're interested in running the app ask about the config files :-)
-2. Install *docker-compose*
+2. After you receive the config file put it in the */backend/config/* folder
+3. Install *docker-compose*
 (https://docs.docker.com/compose/install/)
 
 ## Running in development mode
