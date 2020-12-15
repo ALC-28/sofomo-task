@@ -18,10 +18,16 @@ describe('The server', () => {
 
   after(() => disconnect());
 
-  it('should return a 200 status on GET / requests.', () => {
+  it('should return a 200 status on GET Swagger requests.', () => {
     return request(app)
-      .get('/')
+      .get('/swagger/')
       .expect(200);
+  });
+
+  it('should return a 400 status on GET API requests.', () => {
+    return request(app)
+      .get('/api/geolocations')
+      .expect(400);
   });
 
 });
