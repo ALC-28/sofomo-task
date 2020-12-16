@@ -53,12 +53,19 @@
   "proxy": "http://backend:3001",
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/chai": "^4.2.14",
+    "@types/enzyme": "^3.10.8",
     "@types/jwt-decode": "^3.1.0",
     "@types/lodash": "^4.14.165",
     "@types/react": "^16.14.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/recoil": "0.0.1",
+    "@types/sinon": "^9.0.9",
     "@types/yup": "^0.29.9",
-    "install": "^0.13.0"
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.3.2",
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "install": "^0.13.0",
+    "sinon": "^9.2.2"
   }
 }
